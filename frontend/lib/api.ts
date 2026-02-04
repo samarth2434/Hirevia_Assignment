@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081/api';
+
 const api = axios.create({
-  baseURL: '/api', // Use Next.js proxy instead of direct backend URL
+  baseURL: API_URL,
+  withCredentials: true, // Important for CORS with credentials
 });
 
 // Request interceptor to add mock auth
