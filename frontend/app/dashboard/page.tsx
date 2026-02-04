@@ -36,7 +36,7 @@ export default function DashboardPage() {
   };
 
   const openVideoInterview = () => {
-    window.open('http://localhost:3001', '_blank');
+    window.location.href = '/video-interview';
   };
 
   const getGreeting = () => {
