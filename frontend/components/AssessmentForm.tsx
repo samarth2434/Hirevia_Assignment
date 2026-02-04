@@ -149,43 +149,59 @@ export const AssessmentForm: React.FC<AssessmentFormProps> = ({ onSubmitSuccess 
 
         {/* Multiple Choice Questions */}
         <section className="border-b border-gray-600 pb-8">
-          <h2 className="text-xl font-semibold text-white mb-4">
+          <h2 className="text-xl font-semibold text-white mb-6">
             Technical Questions
           </h2>
           
-          {assessmentQuestions.map((question, index) => (
-            <div key={question.id} className="mb-6">
-              <fieldset>
-                <legend className="text-sm font-medium text-gray-300 mb-3">
-                  {index + 1}. {question.question} *
-                </legend>
-                <div className="space-y-2">
-                  {question.options?.map((option, optionIndex) => (
-                    <label key={optionIndex} className="flex items-center">
-                      <input
-                        {...register(question.id as keyof AssessmentFormData)}
-                        type="radio"
-                        value={option}
-                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-600 bg-gray-700"
-                      />
-                      <span className="ml-2 text-sm text-gray-300">{option}</span>
-                    </label>
-                  ))}
+          {/* Group questions by category */}
+          {['Frontend Development', 'Backend Development', 'Database & DevOps'].map((category) => {
+            const categoryQuestions = assessmentQuestions.filter(q => q.category === category);
+            return (
+              <div key={category} className="mb-8">
+                <h3 className="text-lg font-medium text-blue-300 mb-4 border-l-4 border-blue-500 pl-3">
+                  {category}
+                </h3>
+                <div className="space-y-6">
+                  {categoryQuestions.map((question, index) => {
+                    const questionNumber = assessmentQuestions.findIndex(q => q.id === question.id) + 1;
+                    return (
+                      <div key={question.id} className="bg-gray-700 p-4 rounded-lg">
+                        <fieldset>
+                          <legend className="text-sm font-medium text-gray-200 mb-3">
+                            {questionNumber}. {question.question} *
+                          </legend>
+                          <div className="space-y-2">
+                            {question.options?.map((option, optionIndex) => (
+                              <label key={optionIndex} className="flex items-start cursor-pointer hover:bg-gray-600 p-2 rounded transition-colors">
+                                <input
+                                  {...register(question.id as keyof AssessmentFormData)}
+                                  type="radio"
+                                  value={option}
+                                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-500 bg-gray-600 mt-0.5 flex-shrink-0"
+                                />
+                                <span className="ml-3 text-sm text-gray-300 leading-relaxed">{option}</span>
+                              </label>
+                            ))}
+                          </div>
+                          {errors[question.id as keyof AssessmentFormData] && (
+                            <p className="mt-2 text-sm text-red-400">
+                              {errors[question.id as keyof AssessmentFormData]?.message}
+                            </p>
+                          )}
+                        </fieldset>
+                      </div>
+                    );
+                  })}
                 </div>
-                {errors[question.id as keyof AssessmentFormData] && (
-                  <p className="mt-1 text-sm text-red-400">
-                    {errors[question.id as keyof AssessmentFormData]?.message}
-                  </p>
-                )}
-              </fieldset>
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </section>
 
         {/* Text Input Questions */}
         <section className="border-b border-gray-600 pb-8">
           <h2 className="text-xl font-semibold text-white mb-4">
-            Experience Questions
+            Experience & Problem Solving
           </h2>
           
           <div className="space-y-6">
@@ -200,7 +216,7 @@ export const AssessmentForm: React.FC<AssessmentFormProps> = ({ onSubmitSuccess 
                 className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white bg-gray-700 ${
                   errors.codingExperience ? 'border-red-500' : 'border-gray-600'
                 }`}
-                placeholder="Tell us about your coding background, languages you're comfortable with, and any frameworks you've used..."
+                placeholder="Tell us about your coding background, languages you're comfortable with, frameworks you've used, and your development philosophy..."
               />
               {errors.codingExperience && (
                 <p className="mt-1 text-sm text-red-400">{errors.codingExperience.message}</p>
@@ -218,10 +234,28 @@ export const AssessmentForm: React.FC<AssessmentFormProps> = ({ onSubmitSuccess 
                 className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white bg-gray-700 ${
                   errors.projectDescription ? 'border-red-500' : 'border-gray-600'
                 }`}
-                placeholder="Describe a project that challenged you, the technologies used, your role, and what you learned..."
+                placeholder="Describe a complex project that challenged you, the technologies used, your specific role, obstacles you faced, and what you learned from the experience..."
               />
               {errors.projectDescription && (
                 <p className="mt-1 text-sm text-red-400">{errors.projectDescription.message}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="problemSolving" className="block text-sm font-medium text-gray-300 mb-2">
+                How do you approach debugging and problem-solving in your code? *
+              </label>
+              <textarea
+                {...register('problemSolving')}
+                id="problemSolving"
+                rows={4}
+                className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white bg-gray-700 ${
+                  errors.problemSolving ? 'border-red-500' : 'border-gray-600'
+                }`}
+                placeholder="Describe your methodology for debugging issues, tools you use, how you research solutions, and your approach to solving complex technical problems..."
+              />
+              {errors.problemSolving && (
+                <p className="mt-1 text-sm text-red-400">{errors.problemSolving.message}</p>
               )}
             </div>
           </div>
