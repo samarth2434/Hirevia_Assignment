@@ -1,0 +1,14 @@
+com\example\authbackend\controller\MockAuthController$LoginRequest.class
+com\example\authbackend\AuthBackendApplication.class
+com\example\authbackend\controller\MockAssessmentController$AssessmentSubmission.class
+com\example\authbackend\controller\AdminController.class
+com\example\authbackend\controller\MockAssessmentController.class
+com\example\authbackend\controller\MockAuthController$RegisteredUser.class
+com\example\authbackend\controller\UserController.class
+com\example\authbackend\controller\AssessmentController.class
+com\example\authbackend\config\SecurityConfig.class
+com\example\authbackend\model\AssessmentSubmission.class
+com\example\authbackend\config\MockSecurityConfig.class
+com\example\authbackend\controller\MockAuthController$RegisterRequest.class
+com\example\authbackend\controller\HealthController.class
+com\example\authbackend\controller\MockAuthController.class

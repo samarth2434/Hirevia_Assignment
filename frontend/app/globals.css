@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 17, 24, 39;
+  --background-end-rgb: 31, 41, 55;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  min-height: 100vh;
+}
+
+/* Input field styling for better visibility */
+input[type="text"], 
+input[type="password"], 
+input[type="email"],
+textarea,
+select {
+  color: #ffffff !important;
+  background-color: #374151 !important;
+  border-color: #4b5563 !important;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+  color: #ffffff !important;
+  background-color: #374151 !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 1px #3b82f6 !important;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+input[type="email"]::placeholder,
+textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Radio and checkbox styling for dark theme */
+input[type="radio"],
+input[type="checkbox"] {
+  background-color: #374151 !important;
+  border-color: #4b5563 !important;
+}
+
+input[type="radio"]:checked,
+input[type="checkbox"]:checked {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+/* Select dropdown options styling */
+select option {
+  background-color: #374151 !important;
+  color: #ffffff !important;
+}
