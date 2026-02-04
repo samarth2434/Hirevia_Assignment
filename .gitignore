@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Production builds
+.next/
+*/.next/
+dist/
+*/dist/
+build/
+*/build/
+
+# Environment variables
+.env
+.env.local
+.env.production
+*/.env
+*/.env.local
+*/.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Java
+target/
+*.jar
+*.war
+*.ear
+*.class
+
+# Spring Boot
+*.pid
+*.log
+
+# H2 Database
+*.db
+*.trace.db
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
