@@ -22,12 +22,4 @@ public class WelcomeController {
         ));
         return response;
     }
-
-    @GetMapping("/health")
-    public Map<String, String> health() {
-        Map<String, String> response = new HashMap<>();
-        response.put("status", "UP");
-        response.put("message", "Backend is healthy");
-        return response;
-    }
 }
