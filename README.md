@@ -1,13 +1,14 @@
 # Hirevia - Complete Interview Platform
 
-A comprehensive interview platform featuring secure authentication, dynamic assessment forms, and real-time video interviews. Built with Next.js, Spring Boot, and WebRTC for a complete hiring solution.
+A comprehensive interview platform featuring secure authentication, real-time video interviews, dynamic assessment forms, and responsive design. Built with Next.js, Spring Boot, and WebRTC for a complete hiring solution.
 
 ## 🚀 Project Overview
 
-This platform provides end-to-end interview management with three core modules:
-- **Authentication System** - Secure user management with role-based access
-- **Assessment Platform** - Dynamic questionnaires with real-time validation  
-- **Video Interview System** - WebRTC-powered live interview interface
+This platform provides end-to-end interview management with four core modules:
+1. **Authentication System** - Secure user management with role-based access
+2. **Video Interview System** - WebRTC-powered live interview interface
+3. **Assessment Platform** - Dynamic questionnaires with real-time validation
+4. **Responsive Design** - Mobile-first, professional user interface
 
 ## 📁 Project Structure
 
@@ -70,44 +71,54 @@ cd video-interview && npm run dev
 
 ## 🎯 Core Features
 
-### 🔐 Authentication & Authorization
+### 1. 🔐 Authentication & Authorization System
+A secure authentication system using Next.js (frontend), Spring Boot (backend), and Keycloak (OAuth2/OIDC).
+
+#### Authentication Features
 - **Mock Authentication** - Development-ready auth without Docker
 - **Keycloak Integration** - Production OAuth2/OIDC support
 - **Role-Based Access** - USER and ADMIN role management
-- **JWT Security** - Token-based API protection
-- **Session Management** - Persistent login with auto-refresh
-- **User Registration** - Self-service account creation
+- **JWT Security** - Token-based API protection with auto-refresh
+- **Session Management** - Persistent login with secure storage
+- **User Registration** - Self-service account creation with validation
 
-### �  Dynamic Assessment Platform
-- **Smart Forms** - React Hook Form with Zod validation
-- **Multiple Question Types** - Radio buttons, text inputs, checkboxes
-- **Real-time Validation** - Instant feedback on form errors
-- **Progress Tracking** - Visual completion indicators
-- **Result Management** - Comprehensive answer review
-- **Admin Analytics** - Assessment statistics and insights
+#### Security Implementation
+- **JWT Token Validation** - Secure API access control
+- **CORS Configuration** - Cross-origin request handling
+- **Role-Based Protection** - Route-level access control
+- **Input Validation** - Comprehensive data sanitization
+- **Secure Headers** - XSS and CSRF protection
 
-### 🎥 Real-Time Video Interview System
+#### Authentication Quick Start
+```bash
+# Login with test credentials
+Username: testuser | Password: password123  # Regular user
+Username: admin    | Password: admin123     # Admin user
+```
+
+### 2. 🎥 Real-Time Video Interview System
 A complete video interview system built with Next.js, WebRTC, and Tailwind CSS.
 
 #### Video Features
 - 🎥 **WebRTC Video Streaming** - Native browser video capture
 - ⏱️ **Interview Timer** - Countdown with visual warnings
 - 🔄 **Camera Controls** - Toggle video/audio on/off
-- 📱 **Responsive Layout** - Main video + floating self-preview
+- 📱 **Professional Layout** - Main video + floating self-preview
 - 🎛️ **Interview Controls** - Start/Stop session management
 - 🧹 **Clean Cleanup** - Proper media track disposal
 
 #### Video Components
-- `VideoInterview` - Main interview interface
-- `Timer` - Countdown timer with warnings  
-- `VideoPlayer` - WebRTC video stream handler
-- `CameraControls` - Camera toggle controls
+- `VideoInterview` - Main interview interface with professional layout
+- `Timer` - Countdown timer with MM:SS format and warnings
+- `VideoPlayer` - WebRTC video stream handler with overlays
+- `CameraControls` - Media device controls and session management
 
-#### WebRTC Flow
-1. **getUserMedia()** - Request camera/microphone access
-2. **Stream Display** - Show local video feed
-3. **Remote Simulation** - Placeholder for candidate stream
-4. **Cleanup** - Properly dispose media tracks on unmount
+#### WebRTC Implementation Flow
+1. **getUserMedia()** - Request camera/microphone access with constraints
+2. **Stream Display** - Show local video feed with proper aspect ratio
+3. **Remote Simulation** - Placeholder for interviewer video stream
+4. **Media Controls** - Toggle video/audio tracks dynamically
+5. **Cleanup** - Properly dispose media tracks on component unmount
 
 #### Video Quick Start
 ```bash
@@ -117,11 +128,80 @@ npm run dev
 ```
 Open: http://localhost:3001/interview
 
-### 👨‍💼 Admin Dashboard
-- **User Management** - View and manage all users
-- **Assessment Analytics** - Detailed submission statistics
-- **System Monitoring** - Health checks and performance metrics
-- **Role Assignment** - Manage user permissions
+### 3. 📋 Dynamic Assessment Platform
+Comprehensive technical assessment system with multiple question types and real-time validation.
+
+#### Assessment Features
+- **Smart Forms** - React Hook Form with Zod validation
+- **Multiple Question Types** - Radio buttons, text inputs, checkboxes
+- **Categorized Questions** - Frontend, Backend, Database & DevOps
+- **Real-time Validation** - Instant feedback on form errors
+- **Progress Tracking** - Visual completion indicators
+- **Result Management** - Comprehensive answer review and scoring
+- **Admin Analytics** - Assessment statistics and insights
+
+#### Question Categories
+- **Frontend Development** (5 questions)
+  - React hooks and Virtual DOM concepts
+  - TypeScript advantages and CSS properties
+  - Component lifecycle and state management
+
+- **Backend Development** (5 questions)
+  - HTTP methods and REST API design
+  - Authentication vs Authorization
+  - JWT tokens and Spring Boot annotations
+
+- **Database & DevOps** (5 questions)
+  - Database indexing and SQL joins
+  - Docker containers and Git workflows
+  - ACID properties and system architecture
+
+#### Assessment Components
+- `AssessmentForm` - Main form with validation and submission
+- `AssessmentResult` - Results display with score breakdown
+- Dynamic question rendering with category grouping
+- Progress indicators and completion tracking
+
+#### Skills Assessment
+Comprehensive skill selection covering:
+- **Frontend**: JavaScript, TypeScript, React, Next.js, Vue.js, Angular
+- **Backend**: Node.js, Python, Java, Spring Boot, C#, .NET
+- **Databases**: MySQL, PostgreSQL, MongoDB, Redis
+- **Cloud & DevOps**: AWS, Azure, Docker, Kubernetes
+- **Tools**: Git, REST APIs, GraphQL, Testing frameworks
+
+### 4. �M Responsive Design & User Experience
+Modern, mobile-first design with professional aesthetics and optimal user experience.
+
+#### Design Features
+- **Mobile-First Approach** - Optimized for all screen sizes
+- **Glass-Morphism Effects** - Modern backdrop blur and transparency
+- **Gradient Designs** - Professional color schemes and transitions
+- **Dark Theme** - Eye-friendly interface with proper contrast
+- **Smooth Animations** - Hover effects and micro-interactions
+- **Professional Typography** - Clear hierarchy and readability
+
+#### User Experience Enhancements
+- **Real-time Feedback** - Instant validation and progress updates
+- **Loading States** - Clear progress indicators and spinners
+- **Error Handling** - Graceful failure management with user guidance
+- **Intuitive Navigation** - Clear CTAs and breadcrumb trails
+- **Accessibility** - WCAG compliant with keyboard navigation
+
+#### Responsive Breakpoints
+```css
+/* Mobile First */
+sm: 640px   /* Small devices */
+md: 768px   /* Medium devices */
+lg: 1024px  /* Large devices */
+xl: 1280px  /* Extra large devices */
+```
+
+#### Design System
+- **Color Palette**: Professional blues, purples, and gradients
+- **Component Library**: Reusable UI components with consistent styling
+- **Layout Grid**: Flexible grid system for all screen sizes
+- **Interactive Elements**: Buttons, cards, and forms with hover states
 
 ## 🛠️ Technology Stack
 
@@ -151,7 +231,7 @@ Open: http://localhost:3001/interview
 - **OAuth2/OIDC** - Industry standard protocols
 - **Mock Authentication** - Development without external dependencies
 
-## 🌐 Application Access
+## � Application Access
 
 | Service | URL | Port | Description |
 |---------|-----|------|-------------|
@@ -229,29 +309,6 @@ cd backend && ./mvnw spring-boot:run    # Start backend
 cd frontend && npm run dev               # Start frontend
 cd video-interview && npm run dev       # Start video system
 ```
-
-## 🎯 Key Project Highlights
-
-### 🔒 Security Implementation
-- **JWT Token Validation** - Secure API access control
-- **CORS Configuration** - Cross-origin request handling
-- **Role-Based Protection** - Route-level access control
-- **Input Validation** - Comprehensive data sanitization
-- **Secure Headers** - XSS and CSRF protection
-
-### 🎨 User Experience Design
-- **Dark Theme** - Professional, eye-friendly interface
-- **Responsive Design** - Mobile-first approach
-- **Real-time Validation** - Instant user feedback
-- **Loading States** - Clear progress indicators
-- **Error Handling** - Graceful failure management
-
-### ⚡ Technical Excellence
-- **TypeScript Integration** - Full type safety
-- **Modular Architecture** - Clean separation of concerns
-- **Custom React Hooks** - Reusable WebRTC logic
-- **API Route Optimization** - Next.js API middleware
-- **Memory Management** - Proper resource cleanup
 
 ## 🔧 Troubleshooting Guide
 
@@ -357,8 +414,8 @@ This project is developed for **educational and demonstration purposes**.
 
 **Hirevia** demonstrates modern full-stack development with:
 - **Secure Authentication** - Enterprise-grade user management
+- **Real-Time Video** - WebRTC live communication
 - **Dynamic Forms** - Real-time validation and submission
-- **WebRTC Integration** - Live video communication
 - **Responsive Design** - Mobile-first user experience
 - **API Architecture** - RESTful backend services
 
