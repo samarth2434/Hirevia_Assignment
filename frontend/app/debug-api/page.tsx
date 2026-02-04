@@ -62,6 +62,7 @@ export default function DebugApiPage() {
       setLoading(false);
     }
   };
+  const testLogin = async () => {
     setLoading(true);
     try {
       // Test using Next.js proxy
