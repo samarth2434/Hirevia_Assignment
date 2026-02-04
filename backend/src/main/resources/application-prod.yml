@@ -2,8 +2,6 @@ server:
   port: ${PORT:8080}
 
 spring:
-  profiles:
-    active: mock
   
   main:
     allow-bean-definition-overriding: true
