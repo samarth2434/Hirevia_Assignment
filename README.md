@@ -1,73 +1,105 @@
-# Complete Interview Platform
+# Hirevia - Complete Interview Platform
 
-A comprehensive interview platform with authentication, assessment forms, and real-time video interviews using Next.js, Spring Boot, and WebRTC.
+A comprehensive interview platform featuring secure authentication, dynamic assessment forms, and real-time video interviews. Built with Next.js, Spring Boot, and WebRTC for a complete hiring solution.
 
-## Project Structure
+## 🚀 Project Overview
+
+This platform provides end-to-end interview management with three core modules:
+- **Authentication System** - Secure user management with role-based access
+- **Assessment Platform** - Dynamic questionnaires with real-time validation  
+- **Video Interview System** - WebRTC-powered live interview interface
+
+## 📁 Project Structure
 
 ```
-├── frontend/                 # Next.js application (Port 3002)
-│   ├── app/                 # App router pages
-│   ├── components/          # Reusable components
-│   ├── contexts/            # Auth contexts
-│   └── lib/                 # Utilities and API
-├── backend/                  # Spring Boot application (Port 8081)
+├── frontend/                 # Next.js Frontend (Port 3002)
+│   ├── app/                 # App Router pages & API routes
+│   │   ├── api/             # Next.js API endpoints
+│   │   ├── assessment/      # Assessment pages
+│   │   ├── dashboard/       # User dashboard
+│   │   ├── admin/           # Admin panel
+│   │   └── auth/            # Login/Register pages
+│   ├── components/          # Reusable UI components
+│   ├── contexts/            # React contexts (Auth)
+│   ├── lib/                 # Utilities & API clients
+│   └── types/               # TypeScript definitions
+├── backend/                  # Spring Boot Backend (Port 8081)
 │   └── src/main/java/       # Java source code
-├── video-interview/          # Video interview system (Port 3001)
-│   ├── components/          # Video components
-│   ├── hooks/               # WebRTC hooks
+│       ├── controller/      # REST API controllers
+│       ├── config/          # Security & CORS config
+│       └── model/           # Data models
+├── video-interview/          # Video Interview App (Port 3001)
+│   ├── components/          # Video UI components
+│   ├── hooks/               # WebRTC custom hooks
 │   └── app/                 # Interview pages
-├── keycloak/                # Keycloak configuration
-└── docker-compose.yml       # Development setup
+├── keycloak/                # Keycloak configuration (Optional)
+└── scripts/                 # Installation & startup scripts
 ```
 
-## Quick Start
+## ⚡ Quick Start
 
-### Option 1: With Docker (Full Keycloak)
-1. Start Keycloak: `docker-compose up keycloak`
-2. Configure Keycloak realm (see keycloak/README.md)
-3. Start backend: `cd backend && ./mvnw spring-boot:run`
-4. Start frontend: `cd frontend && npm run dev`
+### Recommended: Mock Authentication (No Docker Required)
 
-### Option 2: Mock Authentication (No Docker)
-1. Install dependencies: `./install-all.bat` (Windows) or `./install-all.sh` (Linux/Mac)
-2. Start mock system: `./start-mock.bat`
-3. Access applications:
-   - Frontend: http://localhost:3002
-   - Backend: http://localhost:8081
-   - Video Interview: http://localhost:3001
+```bash
+# 1. Install all dependencies
+./install-all.bat          # Windows
+./install-all.sh           # Linux/Mac
 
-## System Features
+# 2. Start all services
+./start-mock.bat           # Windows
+./start-mock.sh            # Linux/Mac
 
-### 🔐 Authentication System
-- ✅ Keycloak OAuth2/OIDC integration
-- ✅ Mock authentication (no Docker required)
-- ✅ JWT token handling with auto-refresh
-- ✅ Role-based access control (USER/ADMIN)
-- ✅ Protected routes and secure API endpoints
-- ✅ Session persistence and user registration
+# 3. Access applications
+# Frontend: http://localhost:3002
+# Backend API: http://localhost:8081  
+# Video Interview: http://localhost:3001
+```
 
-### 📝 Assessment Platform
-- ✅ Dynamic questionnaire forms with validation
-- ✅ Multiple question types (radio, text, checkbox)
-- ✅ Real-time form validation using Zod
-- ✅ Assessment submission and storage
-- ✅ Admin dashboard with statistics
-- ✅ User assessment history and results
+### Alternative: Full Keycloak Setup
+```bash
+# 1. Start Keycloak
+docker-compose up keycloak
+
+# 2. Configure realm (see keycloak/README.md)
+
+# 3. Start services
+cd backend && ./mvnw spring-boot:run
+cd frontend && npm run dev
+cd video-interview && npm run dev
+```
+
+## 🎯 Core Features
+
+### 🔐 Authentication & Authorization
+- **Mock Authentication** - Development-ready auth without Docker
+- **Keycloak Integration** - Production OAuth2/OIDC support
+- **Role-Based Access** - USER and ADMIN role management
+- **JWT Security** - Token-based API protection
+- **Session Management** - Persistent login with auto-refresh
+- **User Registration** - Self-service account creation
+
+### �  Dynamic Assessment Platform
+- **Smart Forms** - React Hook Form with Zod validation
+- **Multiple Question Types** - Radio buttons, text inputs, checkboxes
+- **Real-time Validation** - Instant feedback on form errors
+- **Progress Tracking** - Visual completion indicators
+- **Result Management** - Comprehensive answer review
+- **Admin Analytics** - Assessment statistics and insights
 
 ### 🎥 Real-Time Video Interview System
 A complete video interview system built with Next.js, WebRTC, and Tailwind CSS.
 
-#### Features
-- 🎥 **WebRTC Video Streaming**: Native browser video capture
-- ⏱️ **Interview Timer**: Countdown with warnings
-- 🔄 **Camera Controls**: Toggle on/off functionality
-- 📱 **Responsive Layout**: Main video + floating self-preview
-- 🎛️ **Interview Controls**: Start/Stop session management
-- 🧹 **Clean Cleanup**: Proper media track disposal
+#### Video Features
+- 🎥 **WebRTC Video Streaming** - Native browser video capture
+- ⏱️ **Interview Timer** - Countdown with visual warnings
+- 🔄 **Camera Controls** - Toggle video/audio on/off
+- 📱 **Responsive Layout** - Main video + floating self-preview
+- 🎛️ **Interview Controls** - Start/Stop session management
+- 🧹 **Clean Cleanup** - Proper media track disposal
 
-#### Components
+#### Video Components
 - `VideoInterview` - Main interview interface
-- `Timer` - Countdown timer with warnings
+- `Timer` - Countdown timer with warnings  
 - `VideoPlayer` - WebRTC video stream handler
 - `CameraControls` - Camera toggle controls
 
@@ -77,7 +109,7 @@ A complete video interview system built with Next.js, WebRTC, and Tailwind CSS.
 3. **Remote Simulation** - Placeholder for candidate stream
 4. **Cleanup** - Properly dispose media tracks on unmount
 
-#### Quick Start
+#### Video Quick Start
 ```bash
 cd video-interview
 npm install
@@ -86,153 +118,252 @@ npm run dev
 Open: http://localhost:3001/interview
 
 ### 👨‍💼 Admin Dashboard
-- ✅ Assessment statistics and analytics
-- ✅ User management and role assignment
-- ✅ Submission tracking and review
-- ✅ System monitoring and health checks
+- **User Management** - View and manage all users
+- **Assessment Analytics** - Detailed submission statistics
+- **System Monitoring** - Health checks and performance metrics
+- **Role Assignment** - Manage user permissions
 
-## Technology Stack
+## 🛠️ Technology Stack
 
-### Frontend
-- **Next.js 14** - React framework with App Router
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first styling
-- **React Hook Form + Zod** - Form validation
+### Frontend Technologies
+- **Next.js 14** - React framework with App Router & API routes
+- **TypeScript** - Type-safe development environment
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Hook Form** - Performant form handling
+- **Zod** - TypeScript-first schema validation
 - **NextAuth.js** - Authentication integration
 
-### Backend
-- **Spring Boot 3** - Java web framework
-- **Spring Security** - Authentication and authorization
-- **Maven** - Dependency management
-- **JWT** - Token-based authentication
+### Backend Technologies  
+- **Spring Boot 3** - Enterprise Java framework
+- **Spring Security** - Authentication & authorization
+- **Maven** - Dependency management & build tool
+- **JWT** - Stateless token authentication
+- **CORS** - Cross-origin resource sharing
 
-### Video System
-- **WebRTC** - Real-time video communication
+### Video & Media
+- **WebRTC** - Real-time peer-to-peer communication
 - **getUserMedia API** - Camera and microphone access
-- **Canvas API** - Video processing and effects
+- **MediaStream API** - Audio/video stream handling
+- **Canvas API** - Video processing capabilities
 
-### Authentication
-- **Keycloak** - Identity and access management
-- **OAuth2/OIDC** - Standard authentication protocols
-- **Mock Auth** - Development without Docker
+### Authentication Options
+- **Keycloak** - Enterprise identity management
+- **OAuth2/OIDC** - Industry standard protocols
+- **Mock Authentication** - Development without external dependencies
 
-## Application URLs
+## 🌐 Application Access
 
-| Service | URL | Description |
-|---------|-----|-------------|
-| Frontend | http://localhost:3002 | Main application |
-| Backend API | http://localhost:8081 | REST API endpoints |
-| Video Interview | http://localhost:3001 | Video interview interface |
-| Keycloak | http://localhost:8080 | Identity provider (if using Docker) |
+| Service | URL | Port | Description |
+|---------|-----|------|-------------|
+| **Frontend** | http://localhost:3002 | 3002 | Main application interface |
+| **Backend API** | http://localhost:8081 | 8081 | REST API endpoints |
+| **Video Interview** | http://localhost:3001 | 3001 | Video interview system |
+| **Keycloak** | http://localhost:8080 | 8080 | Identity provider (optional) |
 
-## User Roles & Access
+## 👥 User Roles & Permissions
 
-### USER Role
-- ✅ Login/Register
-- ✅ Access dashboard
-- ✅ Take assessments
-- ✅ View own results
+### 🟢 USER Role
+- ✅ Account registration and login
+- ✅ Personal dashboard access
+- ✅ Assessment form completion
+- ✅ View personal results and history
 - ✅ Participate in video interviews
+- ✅ Profile management
 
-### ADMIN Role
-- ✅ All USER permissions
+### 🔴 ADMIN Role (Includes all USER permissions)
 - ✅ Admin dashboard access
-- ✅ View all assessments
-- ✅ User management
-- ✅ System statistics
+- ✅ View all user assessments
+- ✅ System analytics and statistics
+- ✅ User management capabilities
+- ✅ Assessment result review
 
-## Default Test Users (Mock Auth)
+## 🔑 Default Test Accounts
 
-| Username | Password | Role | Description |
-|----------|----------|------|-------------|
-| testuser | password123 | USER | Regular user access |
-| admin | admin123 | USER, ADMIN | Full admin access |
+| Username | Password | Roles | Access Level |
+|----------|----------|-------|--------------|
+| `testuser` | `password123` | USER | Standard user access |
+| `admin` | `admin123` | USER, ADMIN | Full administrative access |
 
-## API Endpoints
+*Note: These are mock accounts for development. In production, use proper user management.*
 
-### Authentication
-- `POST /api/auth/login` - User login
-- `POST /api/auth/register` - User registration
-- `GET /api/auth/me` - Get current user
-- `POST /api/auth/logout` - User logout
+## 🔌 API Documentation
 
-### Assessment
-- `POST /api/submit-assessment` - Submit assessment
-- `GET /api/my-assessments` - Get user assessments
-- `GET /api/assessments` - Get all assessments (Admin)
-- `GET /api/assessment-stats` - Get statistics (Admin)
+### Authentication Endpoints
+```http
+POST /api/auth/login          # User authentication
+POST /api/auth/register       # New user registration  
+GET  /api/auth/me            # Current user profile
+POST /api/auth/logout        # Session termination
+GET  /api/auth/test          # API health check
+```
 
-### Admin
-- `GET /api/admin` - Admin dashboard data
-- `GET /api/user` - User dashboard data
+### Assessment Endpoints
+```http
+POST /api/submit-assessment   # Submit completed assessment
+GET  /api/my-assessments     # User's assessment history
+GET  /api/assessments        # All assessments (Admin only)
+GET  /api/assessment-stats   # Analytics data (Admin only)
+```
 
-## Development Scripts
+### Admin & User Endpoints
+```http
+GET  /api/admin              # Admin dashboard data
+GET  /api/user               # User dashboard data
+```
 
-### Windows
-- `install-all.bat` - Install all dependencies
-- `start-mock.bat` - Start mock authentication system
-- `run-frontend.bat` - Start frontend only
-- `run-backend.bat` - Start backend only
-- `run-video.bat` - Start video interview only
+## 🚀 Development Scripts
 
-### Linux/Mac
-- `install-all.sh` - Install all dependencies
-- `./mvnw spring-boot:run` - Start backend
-- `npm run dev` - Start frontend/video
+### Windows Commands
+```batch
+install-all.bat              # Install all project dependencies
+start-mock.bat               # Start complete mock system
+run-frontend.bat             # Start frontend application only
+run-backend.bat              # Start backend API only  
+run-video.bat                # Start video interview only
+```
 
-## Project Highlights
+### Linux/Mac Commands
+```bash
+./install-all.sh             # Install all project dependencies
+cd backend && ./mvnw spring-boot:run    # Start backend
+cd frontend && npm run dev               # Start frontend
+cd video-interview && npm run dev       # Start video system
+```
 
-### Security Features
-- JWT token validation
-- CORS configuration
-- Role-based route protection
-- Secure API endpoints
-- Input validation and sanitization
+## 🎯 Key Project Highlights
 
-### User Experience
-- Dark theme with proper contrast
-- Responsive design for all devices
-- Real-time form validation
-- Loading states and error handling
-- Professional interview interface
+### 🔒 Security Implementation
+- **JWT Token Validation** - Secure API access control
+- **CORS Configuration** - Cross-origin request handling
+- **Role-Based Protection** - Route-level access control
+- **Input Validation** - Comprehensive data sanitization
+- **Secure Headers** - XSS and CSRF protection
 
-### Technical Excellence
-- TypeScript for type safety
-- Modular component architecture
-- Custom React hooks for WebRTC
-- Clean separation of concerns
-- Comprehensive error handling
+### 🎨 User Experience Design
+- **Dark Theme** - Professional, eye-friendly interface
+- **Responsive Design** - Mobile-first approach
+- **Real-time Validation** - Instant user feedback
+- **Loading States** - Clear progress indicators
+- **Error Handling** - Graceful failure management
 
-## Troubleshooting
+### ⚡ Technical Excellence
+- **TypeScript Integration** - Full type safety
+- **Modular Architecture** - Clean separation of concerns
+- **Custom React Hooks** - Reusable WebRTC logic
+- **API Route Optimization** - Next.js API middleware
+- **Memory Management** - Proper resource cleanup
 
-### Common Issues
-1. **Camera not working**: Check browser permissions and see `CAMERA_TROUBLESHOOTING.md`
-2. **Network errors**: Ensure backend is running on port 8081
-3. **Login failures**: Verify mock authentication is enabled
-4. **Port conflicts**: Check if ports 3001, 3002, 8081 are available
+## 🔧 Troubleshooting Guide
 
-### Debug Pages
-- `/debug-login` - Test login functionality
-- `/test-assessment` - Test assessment submission
-- `/test-full-flow` - Test complete user flow
+### Common Issues & Solutions
 
-## Documentation
+#### 🎥 Video Interview Problems
+```bash
+# Camera not working
+- Check browser permissions (Chrome: Settings > Privacy > Camera)
+- Ensure no other applications are using the camera
+- Try refreshing the page or restarting browser
+- See CAMERA_TROUBLESHOOTING.md for detailed steps
+```
 
-- `SETUP.md` - Detailed setup instructions
-- `INSTALLATION_GUIDE.md` - Installation troubleshooting
-- `MOCK_SETUP_GUIDE.md` - Mock authentication setup
-- `CAMERA_TROUBLESHOOTING.md` - Video interview issues
-- `video-interview/COMPONENTS.md` - Video component documentation
-- `video-interview/WEBRTC_FLOW.md` - WebRTC implementation details
+#### 🌐 Network Connection Issues  
+```bash
+# Backend connection failed
+- Verify backend is running on port 8081
+- Check Windows Firewall settings
+- Ensure no other services are using port 8081
+- Try: netstat -an | findstr :8081
+```
 
-## Contributing
+#### 🔐 Authentication Problems
+```bash
+# Login failures
+- Verify mock authentication is enabled in backend
+- Check browser console for detailed error messages
+- Clear browser cache and localStorage
+- Restart backend service
+```
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+#### ⚠️ Port Conflicts
+```bash
+# Port already in use
+- Frontend (3002): netstat -ano | findstr :3002
+- Backend (8081): netstat -ano | findstr :8081  
+- Video (3001): netstat -ano | findstr :3001
+- Kill process: taskkill /PID <process_id> /F
+```
 
-## License
+### 🧪 Debug & Testing Pages
 
-This project is for educational and demonstration purposes.
+Access these URLs for troubleshooting:
+
+| Debug Page | URL | Purpose |
+|------------|-----|---------|
+| **Login Test** | http://localhost:3002/debug-login | Test authentication flow |
+| **Assessment Test** | http://localhost:3002/test-assessment | Test form submission |
+| **Full Flow Test** | http://localhost:3002/test-full-flow | End-to-end user journey |
+| **API Debug** | http://localhost:3002/debug-api | Backend connectivity test |
+| **Video Test** | http://localhost:3001/test | Camera and WebRTC testing |
+
+## 📚 Documentation Resources
+
+### Setup & Installation
+- **`SETUP.md`** - Detailed setup instructions
+- **`INSTALLATION_GUIDE.md`** - Installation troubleshooting
+- **`MOCK_SETUP_GUIDE.md`** - Mock authentication configuration
+- **`NO_DOCKER_SETUP.md`** - Docker-free setup guide
+
+### Technical Documentation  
+- **`CAMERA_TROUBLESHOOTING.md`** - Video interview issue resolution
+- **`video-interview/COMPONENTS.md`** - Video component architecture
+- **`video-interview/WEBRTC_FLOW.md`** - WebRTC implementation details
+- **`keycloak/README.md`** - Keycloak configuration guide
+
+## 🤝 Contributing Guidelines
+
+### Development Workflow
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Test** thoroughly using debug pages
+5. **Push** to branch (`git push origin feature/amazing-feature`)
+6. **Submit** a Pull Request
+
+### Code Standards
+- **TypeScript** - Use strict type checking
+- **ESLint** - Follow configured linting rules
+- **Component Structure** - Maintain modular architecture
+- **Error Handling** - Implement comprehensive error boundaries
+- **Documentation** - Update relevant README sections
+
+## 📄 License & Usage
+
+This project is developed for **educational and demonstration purposes**. 
+
+### Usage Rights
+- ✅ Learning and educational use
+- ✅ Portfolio demonstration
+- ✅ Technical interview showcase
+- ✅ Open source contribution
+
+### Restrictions
+- ❌ Commercial use without permission
+- ❌ Redistribution without attribution
+- ❌ Removal of original credits
+
+---
+
+## 🎉 Project Showcase
+
+**Hirevia** demonstrates modern full-stack development with:
+- **Secure Authentication** - Enterprise-grade user management
+- **Dynamic Forms** - Real-time validation and submission
+- **WebRTC Integration** - Live video communication
+- **Responsive Design** - Mobile-first user experience
+- **API Architecture** - RESTful backend services
+
+Perfect for showcasing technical skills in **React**, **Spring Boot**, **WebRTC**, and **modern web development practices**.
+
+---
+
+*Built with ❤️ using Next.js, Spring Boot, and WebRTC*
