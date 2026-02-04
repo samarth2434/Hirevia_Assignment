@@ -21,7 +21,7 @@ export function MockAuthProvider({ children }: { children: React.ReactNode }) {
     // Check if user is already logged in
     const initAuth = async () => {
       try {
-        if (mockAuth.isAuthenticated()) {
+        if (typeof window !== 'undefined' && mockAuth.isAuthenticated()) {
           // Get stored user info instead of making API call
           const userStr = localStorage.getItem('mock_user');
           if (userStr) {

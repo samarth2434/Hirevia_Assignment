@@ -39,11 +39,13 @@ class MockAuthService {
       const data = await response.json();
       
       // Store token in localStorage
-      localStorage.setItem('mock_token', data.access_token);
-      localStorage.setItem('mock_user', JSON.stringify({
-        username: data.username,
-        roles: data.roles,
-      }));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('mock_token', data.access_token);
+        localStorage.setItem('mock_user', JSON.stringify({
+          username: data.username,
+          roles: data.roles,
+        }));
+      }
       
       return data;
     } catch (error: any) {
@@ -60,6 +62,8 @@ class MockAuthService {
 
     try {
       // Get stored user info instead of making API call
+      if (typeof window === 'undefined') return null; // SSR check
+      
       const userStr = localStorage.getItem('mock_user');
       if (!userStr) {
         this.logout();
@@ -108,19 +112,24 @@ class MockAuthService {
   }
 
   logout(): void {
+    if (typeof window === 'undefined') return; // SSR check
     localStorage.removeItem('mock_token');
     localStorage.removeItem('mock_user');
   }
 
   getToken(): string | null {
+    if (typeof window === 'undefined') return null; // SSR check
     return localStorage.getItem('mock_token');
   }
 
   isAuthenticated(): boolean {
+    if (typeof window === 'undefined') return false; // SSR check
     return !!this.getToken();
   }
 
   hasRole(role: string): boolean {
+    if (typeof window === 'undefined') return false; // SSR check
+    
     const userStr = localStorage.getItem('mock_user');
     if (!userStr) return false;
     

@@ -4,6 +4,8 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 import { useMockAuth } from '@/contexts/MockAuthContext';
 import { useState, useEffect } from 'react';
 
+export const dynamic = 'force-dynamic';
+
 export default function DashboardPage() {
   const { user, hasRole, logout } = useMockAuth();
   const [currentTime, setCurrentTime] = useState(new Date());
