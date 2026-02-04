@@ -2,9 +2,6 @@ server:
   port: 8081
 
 spring:
-  profiles:
-    active: mock
-  
   main:
     allow-bean-definition-overriding: true
   
