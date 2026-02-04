@@ -33,6 +33,7 @@ public class MockSecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/").permitAll() // Allow root path
                 .requestMatchers("/actuator/**").permitAll()
                 .requestMatchers("/health").permitAll()
                 .requestMatchers("/api/auth/**").permitAll() // Mock auth endpoints
