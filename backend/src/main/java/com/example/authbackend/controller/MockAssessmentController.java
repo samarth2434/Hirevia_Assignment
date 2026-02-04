@@ -14,8 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001", "http://localhost:3002"})
-@Profile("mock") // Only active when 'mock' profile is enabled
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "https://*.vercel.app"})
 public class MockAssessmentController {
 
     // In-memory storage for demo purposes
