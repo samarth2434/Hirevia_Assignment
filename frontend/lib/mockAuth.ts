@@ -17,15 +17,17 @@ interface MockAuthResponse {
 }
 
 class MockAuthService {
-  private baseUrl = '/api'; // Use Next.js API routes
+  private baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081/api';
   
   async login(username: string, password: string): Promise<MockAuthResponse> {
     try {
+      console.log('Login URL:', `${this.baseUrl}/auth/login`);
       const response = await fetch(`${this.baseUrl}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // Important for CORS
         body: JSON.stringify({ username, password }),
       });
 
@@ -33,7 +35,7 @@ class MockAuthService {
         if (response.status === 401) {
           throw new Error('Invalid credentials');
         }
-        throw new Error(`Login failed: ${response.status} ${response.statusText}`);
+        throw new Error(`Login failed: ${response.status}`);
       }
 
       const data = await response.json();
@@ -49,8 +51,9 @@ class MockAuthService {
       
       return data;
     } catch (error: any) {
+      console.error('Login error details:', error);
       if (error.name === 'TypeError' && error.message.includes('fetch')) {
-        throw new Error(`Failed to connect to backend server. Please ensure the backend is running on http://localhost:8081`);
+        throw new Error(`Failed to connect to backend server at ${this.baseUrl}`);
       }
       throw error;
     }
@@ -94,18 +97,20 @@ class MockAuthService {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ username, password, email, fullName }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || `Registration failed: ${response.status} ${response.statusText}`);
+        throw new Error(errorData.error || `Registration failed: ${response.status}`);
       }
 
       return await response.json();
     } catch (error: any) {
+      console.error('Registration error:', error);
       if (error.name === 'TypeError' && error.message.includes('fetch')) {
-        throw new Error(`Failed to connect to backend server. Please ensure the backend is running on http://localhost:8081`);
+        throw new Error(`Failed to connect to backend server at ${this.baseUrl}`);
       }
       throw error;
     }
