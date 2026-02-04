@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(request: NextRequest) {
   try {
     // Forward the request to the backend
-    const backendResponse = await fetch('http://localhost:8081/api/auth/test', {
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081/api';
+    const backendResponse = await fetch(`${backendUrl}/auth/test`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

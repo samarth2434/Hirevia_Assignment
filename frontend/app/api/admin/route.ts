@@ -12,7 +12,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Forward the request to the backend
-    const backendResponse = await fetch('http://localhost:8081/api/admin', {
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081/api';
+    const backendResponse = await fetch(`${backendUrl}/admin`, {
       method: 'GET',
       headers: {
         'Authorization': authHeader,
