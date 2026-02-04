@@ -1,6 +1,18 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081/api';
+// Determine API URL based on environment
+const getApiUrl = () => {
+  // In production (Vercel), use production backend
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+    return 'https://hirevia-assignment-3.onrender.com/api';
+  }
+  // In development, use env variable or localhost
+  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081/api';
+};
+
+const API_URL = getApiUrl();
+
+console.log('API URL configured:', API_URL);
 
 const api = axios.create({
   baseURL: API_URL,

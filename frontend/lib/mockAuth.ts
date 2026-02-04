@@ -17,11 +17,14 @@ interface MockAuthResponse {
 }
 
 class MockAuthService {
-  private baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081/api';
+  private baseUrl = typeof window !== 'undefined' && window.location.hostname !== 'localhost'
+    ? 'https://hirevia-assignment-3.onrender.com/api'
+    : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081/api');
   
   async login(username: string, password: string): Promise<MockAuthResponse> {
     try {
       console.log('Login URL:', `${this.baseUrl}/auth/login`);
+      console.log('Environment:', process.env.NEXT_PUBLIC_API_URL);
       const response = await fetch(`${this.baseUrl}/auth/login`, {
         method: 'POST',
         headers: {
