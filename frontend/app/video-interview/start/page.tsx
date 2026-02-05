@@ -1,6 +1,6 @@
 'use client';
 
-import VideoInterview from '@/components/video-interview/VideoInterview';
+import { VideoInterview } from '@/components/video-interview/VideoInterview';
 
 export default function InterviewPage() {
   const handleInterviewStart = () => {
