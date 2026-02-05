@@ -72,7 +72,10 @@ export function MockAuthProvider({ children }: { children: React.ReactNode }) {
       console.error('Login error:', error);
       // Re-throw the error with more context
       if (error.message && error.message.includes('fetch')) {
-        throw new Error(`Network connection failed. Please check if backend is running on http://localhost:8081`);
+        const backendUrl = typeof window !== 'undefined' && window.location.hostname !== 'localhost'
+          ? 'https://hirevia-assignment-3.onrender.com'
+          : 'http://localhost:8081';
+        throw new Error(`Network connection failed. Please check if backend is running at ${backendUrl}`);
       }
       throw error;
     } finally {

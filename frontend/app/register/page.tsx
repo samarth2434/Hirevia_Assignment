@@ -49,9 +49,16 @@ export default function RegisterPage() {
         formData.fullName
       );
 
-      // Registration successful
-      alert(`Registration successful! Welcome ${data.fullName}. You can now login with your credentials.`);
-      router.push('/simple-login');
+      // Registration successful - now auto-login
+      try {
+        await mockAuth.login(formData.username, formData.password);
+        // Login successful, redirect to dashboard
+        router.push('/dashboard');
+      } catch (loginError) {
+        // Registration worked but auto-login failed, redirect to login page
+        alert(`Registration successful! Welcome ${data.fullName}. Please login with your credentials.`);
+        router.push('/simple-login');
+      }
     } catch (err: any) {
       console.error('Registration error:', err);
       setError(err.message || 'Registration failed. Please try again.');
