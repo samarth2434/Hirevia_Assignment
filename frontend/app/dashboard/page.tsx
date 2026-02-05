@@ -9,7 +9,11 @@ export const dynamic = 'force-dynamic';
 export default function DashboardPage() {
   const { user, hasRole, logout } = useMockAuth();
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [assessmentProgress, setAssessmentProgress] = useState({
+  const [assessmentProgress, setAssessmentProgress] = useState<{
+    completed: boolean;
+    score: number | null;
+    lastAttempt: Date | null;
+  }>({
     completed: false,
     score: null,
     lastAttempt: null
@@ -319,7 +323,7 @@ export default function DashboardPage() {
                       <div>
                         <p className="text-white text-sm">Assessment completed</p>
                         <p className="text-gray-400 text-xs">
-                          {assessmentProgress.lastAttempt?.toLocaleDateString()}
+                          {assessmentProgress.lastAttempt ? new Date(assessmentProgress.lastAttempt).toLocaleDateString() : 'Recently'}
                         </p>
                       </div>
                     </div>
