@@ -124,7 +124,7 @@ export default function Home() {
                     Take Assessment
                   </button>
                   <button
-                    onClick={() => navigateTo('http://localhost:3001')}
+                    onClick={() => navigateTo('/video-interview')}
                     className="px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
                   >
                     Video Interview

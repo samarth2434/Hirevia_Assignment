@@ -35,7 +35,7 @@ export default function Navbar() {
                 Assessment
               </button>
               <button 
-                onClick={() => window.open('http://localhost:3001', '_blank')} 
+                onClick={() => navigateTo('/video-interview')} 
                 className="hover:text-blue-200 cursor-pointer"
               >
                 Video Interview
